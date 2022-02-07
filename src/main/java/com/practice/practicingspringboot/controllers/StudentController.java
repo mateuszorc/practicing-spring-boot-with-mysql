@@ -3,8 +3,7 @@ package com.practice.practicingspringboot.controllers;
 import com.practice.practicingspringboot.model.Student;
 import com.practice.practicingspringboot.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -24,5 +23,20 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents() {
         return studentService.getStudents();
+    }
+
+    @PostMapping
+    public  void addStudent(@RequestBody Student student) {
+        studentService.addNewStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId) {
+        studentService.deleteStudent(studentId);
+    }
+
+    @PutMapping()
+    public Student updateStudent (@RequestBody Student student) {
+        return studentService.updateStudent(student);
     }
 }
